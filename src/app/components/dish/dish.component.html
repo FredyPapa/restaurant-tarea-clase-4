@@ -1,0 +1,46 @@
+<div
+  class="card"
+  [ngClass]="{
+    'has-background-success-light': dish.available,
+    'has-background-danger-light': !dish.available
+  }"
+>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure
+          class="image is-128x128"
+          [ngStyle]="{
+            borderColor: dish.available
+              ? 'hsl(141, 53%, 31%)'
+              : 'hsl(348, 86%, 43%)'
+          }"
+        >
+          <img [src]="dish.photo" [alt]="dish.name" />
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4">{{ dish.name }}</p>
+        <p class="subtitle is-6">{{ dish.price | currency: "S./ " }}</p>
+        <span
+          class="tag"
+          [ngClass]="{
+            'is-success': dish.available,
+            'is-danger': !dish.available
+          }"
+        >
+          {{ dish.available ? "Todavía alcanzas" : "Ya no hay 😭" }}
+        </span>
+        <button
+          *ngIf="dish.available"
+          class="button is-success is-small is-outlined"
+          (click)="onAdd(dish)"
+        >
+          <span class="icon is-small">
+            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

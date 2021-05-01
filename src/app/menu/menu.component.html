@@ -1,0 +1,35 @@
+<div class="rw-menu">
+  <h1 class="title is-5">Platillos</h1>
+  <h2 class="subtitle is-6">
+    {{ today | date: "d MMMM y - hh:mm" | uppercase }}
+  </h2>
+  <div class="box">
+    <p class="title is-4">Platillo(s) seleccionado(s):</p>
+    <p class="tag is-success ">Cantidad de platos seleccionados: {{ pedidos.length }}</p>
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead class="has-background-info-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of pedidos">
+          <td>{{pedido.name}}</td>
+          <td>{{ pedido.price | currency: "S./ " }}</td>
+          <td>{{pedido.cantidad}}</td>
+          <td>{{ pedido.total | currency: "S./ " }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+  <hr />
+  <rw-dish
+    *ngFor="let dish of dishes"
+    [dish]="dish"
+    (add)="addDish($event)"
+  ></rw-dish>
+</div>
